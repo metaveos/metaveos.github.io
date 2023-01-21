@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jspdf-master/dist/jspdf.umd.js"></script>
+    <script src="html2canvas.min.js"></script>
+    <script src="js/main.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    </head>
+<body>
+    <div class="container-fluid">
+        <div class="bg"></div>
+        <div class="bg bg2"></div>
+        <div class="bg bg3"></div>
+        <div>
+            <div class="row">
+                <div class="col-md">
+                    <div >
+                        <!-- <div class="container border">
+                            <div class="mt-3 mb-3 h4" style="color: blue; text-align:center">Brand Name</div>
+                         <div class="mb-3 mt-3">
+                             
+                             <input type="text" placeholder="Brand Name" id="name" onkeyup="ted('name','demo')" class="form-control">
+                         </div>
+                        </div> -->
+                         
+                         
+                        <div class="container border mt-3" style="background-color:rgba(255,255,255,.8); box-shadow:0 0 .25em rgba(0,0,0,.25); border-radius:.25em;" >
+                            <div class="mt-3 mb-3 h4" style="color: rgb(0, 0, 0); text-align:center; font-family: 'Orbitron', sans-serif;">CUSTOMER DETAILS</div>
+                             <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                       <label for="" class="form-label">Name</label>
+                                       <input type="text" placeholder="Customer Name" id="cname" onkeyup="ted('cname','cndemo')" class="form-control">
+                                   </div>
+            
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Number</label>
+                                        <input type="number" placeholder="Customer Number" id="cnumber" onkeyup="ted('cnumber','cpdemo')" class="form-control">
+                                    </div>  
+                                    
+                                </div>
+                             </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Email</label>
+                                <input type="email" placeholder="Email Id" id="cemail" onkeyup="ted('cemail','cedemo')" class="form-control">
+                            </div> 
+                            <div class="mb-3">
+                                <label for="" class="form-label">Address</label>
+                                <input type="text" placeholder="Address" id="caddress" onkeyup="ted('caddress','cademo')" class="form-control" maxlength="100">
+                            </div> 
+        
+                        </div>
+
+                    </div>
+    
+                    <div style="display: none;">
+                        <div class="mt-3 mb-3 h4" style="color: blue; text-align:center">Invoice Details</div>
+        
+                        <div class="container border mt-3">
+                            <div class="row">
+                                <div class="col">
+                                    
+                                    <div class="mb-3">
+                                       <label for="" class="form-label">Invoice Number#</label>
+                                       <input type="text" placeholder="Invoice Number" id="txt_1" onkeyup='saveValue("txt_1");' class="form-control">
+                                   </div>
+            
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Order Number</label>
+                                        <input type="text" placeholder="Order Number" id="txt_2" onkeyup='saveValue("txt_2");' class="form-control">
+                                    </div>  
+                                    
+                                </div>
+                             </div>
+                             <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                       <label for="" class="form-label">Invoice Date</label>
+                                       <input type="date" placeholder="Invoice Date" id="id" onchange="tedc('id','iddemo')" class="form-control">
+                                   </div>
+            
+                                </div>
+                                
+                             </div>
+                        </div>
+                    </div>
+    
+                    
+                    <div class="container mt-3 table-responsive border" style="background-color:rgba(255,255,255,.8); box-shadow:0 0 .25em rgba(0,0,0,.25); border-radius:.25em;" >
+                        <div class="mt-3 mb-3 h4" style="color: black; text-align:center; font-family: 'Orbitron', sans-serif;">ITEM DETAILS</div>
+                        <table class="table border">
+                            <thead class="table-success">
+                              <tr style="text-align: center;">
+                                <th>Item Name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Discount</th>
+                                <th>Amount</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <div>
+                                    <tr>
+                                      <td><input type="text" class="form-control" id="itn" onkeyup="calcu('itn','qt','pr','dc','toto')" placeholder="Item Name"></td>
+                                      <td><input type="number" class="form-control" id="qt" onkeyup="calcu('itn','qt','pr','dc','toto')" placeholder="Quantity"></td>
+                                      <td><input type="number" class="form-control" id="pr" onkeyup="calcu('itn','qt','pr','dc','toto')" placeholder="Price(₹)"></td>
+                                      <td><input type="number" class="form-control" id="dc" onkeyup="calcu('itn','qt','pr','dc','toto')" placeholder="Discount(%)"></td>
+                                      <td><input type="number" class="form-control" id="toto" disabled></td>
+                                      
+                                    </tr>
+                                    <tr id="had">
+                                        <td><button class="btn btn-outline-primary" onclick="sad('jet','had','met','cute')">+ Add Item</button> </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+    
+                                </div>
+                                <div>
+                                    <tr id="jet">
+                                      <td><input type="text" class="form-control"  id="itn1" onkeyup="calcu('itn1','qt1','pr1','dc1','toto1')" placeholder="Item Name"></td>
+                                      <td><input type="number" class="form-control"  id="qt1" onkeyup="calcu('itn1','qt1','pr1','dc1','toto1')" placeholder="Quantity"></td>
+                                      <td><input type="number" class="form-control"  id="pr1" onkeyup="calcu('itn1','qt1','pr1','dc1','toto1')" placeholder="Price(₹)"></td>
+                                      <td><input type="number" class="form-control"  id="dc1" onkeyup="calcu('itn1','qt1','pr1','dc1','toto1')" placeholder="Discount(%)"></td>
+                                      <td><input type="number" class="form-control" id="toto1"  disabled ></td>
+                                      
+                                    </tr>
+                                    <tr id="met">
+                                      <td> <button class="btn btn-outline-primary" onclick="sad('jet1','met','met1','cute1')">+ Add Item</button> </td>
+                                      <td> <button class="btn btn-outline-danger" onclick="mad('jet','had','met','cute'),del('itn1','qt1','pr1','dc1','toto1')">- Remove Item</button></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                    </tr>
+    
+                                </div>
+    
+                                <div>
+                                    <tr id="jet1">
+                                      <td><input type="text" class="form-control" id="itn2" onkeyup="calcu('itn2','qt2','pr2','dc2','toto2')" placeholder="Item Name"></td>
+                                      <td><input type="number" class="form-control" id="qt2" onkeyup="calcu('itn2','qt2','pr2','dc2','toto2')" placeholder="Quantity" ></td>
+                                      <td><input type="number" class="form-control" id="pr2" onkeyup="calcu('itn2','qt2','pr2','dc2','toto2')" placeholder="Price(₹)" ></td>
+                                      <td><input type="number" class="form-control" id="dc2" onkeyup="calcu('itn2','qt2','pr2','dc2','toto2')" placeholder="Discount(%)" ></td>
+                                      <td><input type="number" class="form-control" id="toto2" onkeyup="calcu('itn2','qt2','pr2','dc2','toto2')"  disabled></td>
+                                      
+                                    </tr>
+                                    <tr id="met1">
+                                      <td> <button class="btn btn-outline-primary" onclick="sad('jet2','met1','met2','cute2')">+ Add Item</button> </td>
+                                      <td> <button class="btn btn-outline-danger" onclick="mad('jet1','met','met1','cute1','toto2'),del('itn2','qt2','pr2','dc2','toto2')">- Remove Item</button></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                    </tr>
+    
+                                </div>
+                                <div>
+                                    <tr id="jet2">
+                                      <td><input type="text" class="form-control" id="itn3" onkeyup="calcu('itn3','qt3','pr3','dc3','toto3')" placeholder="Item Name"></td>
+                                      <td><input type="number" class="form-control" id="qt3" onkeyup="calcu('itn3','qt3','pr3','dc3','toto3')" placeholder="Quantity" ></td>
+                                      <td><input type="number" class="form-control" id="pr3" onkeyup="calcu('itn3','qt3','pr3','dc3','toto3')" placeholder="Price(₹)" ></td>
+                                      <td><input type="number" class="form-control" id="dc3" onkeyup="calcu('itn3','qt3','pr3','dc3','toto3')" placeholder="Discount(%)" ></td>
+                                      <td><input type="number" class="form-control" id="toto3" onkeyup="calcu('itn3','qt3','pr3','dc3','toto3')"  disabled></td>
+                                      
+                                    </tr>
+                                    <tr id="met2">
+                                      <td> <button class="btn btn-outline-primary" onclick="sad('jet3','met2','met3','cute3')">+ Add Item</button> </td>
+                                      <td> <button class="btn btn-outline-danger" onclick="mad('jet2','met1','met2','cute2','toto3'),del('itn3','qt3','pr3','dc3','toto3')">- Remove Item</button></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                    </tr>
+    
+                                </div>
+                                <div>
+                                    <tr id="jet3">
+                                      <td><input type="text" class="form-control"id="itn4" onkeyup="calcu('itn4','qt4','pr4','dc4','toto4')" placeholder="Item Name"></td>
+                                      <td><input type="number" class="form-control" id="qt4" onkeyup="calcu('itn4','qt4','pr4','dc4','toto4')" placeholder="Quantity"></td>
+                                      <td><input type="number" class="form-control" id="pr4" onkeyup="calcu('itn4','qt4','pr4','dc4','toto4')" placeholder="Price(₹)"></td>
+                                      <td><input type="number" class="form-control" id="dc4" onkeyup="calcu('itn4','qt4','pr4','dc4','toto4')" placeholder="Discount(%)"></td>
+                                      <td><input type="number" class="form-control" id="toto4" onkeyup="calcu('itn4','qt4','pr4','dc4','toto4')" disabled></td>
+                                      
+                                    </tr>
+                                    <tr id="met3">
+                                      <td> <button class="btn btn-outline-primary" onclick="sad('jet4','met3','met4','cute4')">+ Add Item</button> </td>
+                                      <td> <button class="btn btn-outline-danger" onclick="mad('jet3','met2','met3','cute3','toto4'),del('itn4','qt4','pr4','dc4','toto4')">- Remove Item</button></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                    </tr>
+    
+                                </div>
+                                <div>
+                                    <tr id="jet4">
+                                      <td><input type="text" class="form-control" id="itn5" onkeyup="calcu('itn5','qt5','pr5','dc5','toto5')" placeholder="Item Name"></td>
+                                      <td><input type="number" class="form-control" id="qt5" onkeyup="calcu('itn5','qt5','pr5','dc5','toto5')" placeholder="Quantity"></td>
+                                      <td><input type="number" class="form-control" id="pr5" onkeyup="calcu('itn5','qt5','pr5','dc5','toto5')" placeholder="Price(₹)"></td>
+                                      <td><input type="number" class="form-control" id="dc5" onkeyup="calcu('itn5','qt5','pr5','dc5','toto5')" placeholder="Discount(%)"></td>
+                                      <td><input type="number" class="form-control" id="toto5" onkeyup="calcu('itn5','qt5','pr5','dc5','toto5')" disabled></td>
+                                      
+                                    </tr>
+                                    <tr id="met4">
+                                      <td> <button class="btn btn-outline-primary" onclick="sad('jet5','met4','met5','cute5')">+ Add Item</button> </td>
+                                      <td> <button class="btn btn-outline-danger" onclick="mad('jet4','met3','met4','cute4','toto5'),del('itn5','qt5','pr5','dc5','toto5')">- Remove Item</button></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                    </tr>
+    
+                                </div>
+                                <div>
+                                    <tr id="jet5">
+                                      <td><input type="text" class="form-control"id="itn6" onkeyup="calcu('itn6','qt6','pr6','dc6','toto6')" placeholder="Item Name"></td>
+                                      <td><input type="number" class="form-control" id="qt6" onkeyup="calcu('itn6','qt6','pr6','dc6','toto6')" placeholder="Quantity"></td>
+                                      <td><input type="number" class="form-control" id="pr6" onkeyup="calcu('itn6','qt6','pr6','dc6','toto6')" placeholder="Price(₹)"></td>
+                                      <td><input type="number" class="form-control" id="dc6" onkeyup="calcu('itn6','qt6','pr6','dc6','toto6')" placeholder="Discount(%)"></td>
+                                      <td><input type="number" class="form-control" id="toto6" onkeyup="calcu('itn6','qt6','pr6','dc6','toto6')" disabled></td>
+                                      
+                                    </tr>
+                                    <tr id="met5">
+                                      <td> <button class="btn btn-outline-primary" onclick="sad('jet6','met5','met6','cute6')">+ Add Item</button> </td>
+                                      <td> <button class="btn btn-outline-danger" onclick="mad('jet5','met4','met5','cute5','toto6'),del('itn6','qt6','pr6','dc6','toto6')">- Remove Item</button></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                    </tr>
+    
+                                </div>
+                                
+                                <div>
+                                    <tr id="jet6">
+                                      <td><input type="text" class="form-control"id="itn7" onkeyup="calcu('itn7','qt7','pr7','dc7','toto7')" placeholder="Item Name"></td>
+                                      <td><input type="number" class="form-control" id="qt7" onkeyup="calcu('itn7','qt7','pr7','dc7','toto7')" placeholder="Quantity"></td>
+                                      <td><input type="number" class="form-control" id="pr7" onkeyup="calcu('itn7','qt7','pr7','dc7','toto7')" placeholder="Price(₹)"></td>
+                                      <td><input type="number" class="form-control" id="dc7" onkeyup="calcu('itn7','qt7','pr7','dc7','toto7')" placeholder="Discount(%)"></td>
+                                      <td><input type="number" class="form-control" id="toto7" onkeyup="calcu('itn7','qt7','pr7','dc7','toto7')" disabled></td>
+                                      
+                                    </tr>
+                                    <tr id="met6">
+                                      <td> <button class="btn btn-outline-primary" disabled>+ Add Item</button> </td>
+                                      <td> <button class="btn btn-outline-danger" onclick="mad('jet6','met5','met6','cute6','toto7'),del('itn7','qt7','pr7','dc7','toto7')">- Remove Item</button></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                    </tr>
+    
+                                </div>
+                              
+                              
+                          </table>
+                        </table>
+                    </div>
+                    
+                    <div class="container pt-2 mt-3 pb-3" style="background-color:rgba(255,255,255,.8); box-shadow:0 0 .25em rgba(0,0,0,.25); border-radius:.25em;">
+                        <div class="container mt-3" style="display: flex; flex-direction:column; justify-content: center; align-items: flex-end;">
+        
+                            <div class="row">
+                                <input type="text" id="name" class="form-control me-3 mb-2" value="GST" style="width: 120px;" disabled>
+                                <input type="text" placeholder="Percentage" id="gstper" class="form-control me-3 mb-2" style="width: 120px;" onkeyup="gst()">
+                            </div>
+                            <div class="row mt-3">
+                                <input type="text" placeholder="Total(₹):" id="totalf" class="form-control me-3" style="width: 220px;" disabled>
+                            </div>
+                            
+                        </div>
+        
+                        <div class="container mt-3">
+                            <div class="row">
+                                <!-- <div class="col">
+                                    <textarea name="" id="tc" cols="50" rows="5" class="form-control" placeholder="Terms & Conditions" maxlength="250" onkeyup="ted('tc','tcdemo')"></textarea>
+                                </div> -->
+                                <div class="col">
+                                    <div style="display: flex; justify-content: flex-end;">
+                                        <select class="form-select mb-2" style="width: 200px;" id="pm" onchange="tedc('pm','pmdemo')">
+                                            <option disabled selected>Payment Method</option>
+                                            <option>Cash</option>
+                                            <option>UPI</option>
+                                            <option>Debit Card</option>
+                                            <option>Credit Card</option>
+                                            <option>Cheque</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container" style="display: flex; justify-content:center;">
+                            <button onclick="Convert_HTML_To_PDF(),addy()" class="btn btn-outline-primary mt-3 mb-3">Download Invoice  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                              </svg></button>        
+                        </div>
+                    </div>
+
+
+                    
+    
+                    
+                </div>
+        
+        </div>
+            <div class="col-md" style="display: none;" >
+                <div class="container d-flex justify-content-end">
+                    <button onclick="Convert_HTML_To_PDF(),addy()" class="btn btn-outline-primary mt-3 mb-3">Download <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                      </svg></button>   
+                </div>
+                <div id="contentToPrint">
+                    <div class="row">
+                        <div class="col">
+                            <div class="grey">
+                                <h2 id="demo">Metaveos Consultancy Pvt Ltd</h2>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="blue">
+                                <h4>Invoice</h4>
+                                <p>Invoice No: <span id="indemo"></span></p>
+                                <p>Order No: <span id="ondemo"></span></p>
+                                <p>Invoice Date: <span id="iddemo"></span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="h6">Invoice To</div>
+                                <div class="h5 mt-4" id="cndemo">Customer Name</div>
+                                <div class="container ms-0 ps-0" id="cust-det" style="width: 400px;">
+                                    <p>Phone Number: <span id="cpdemo"></span></p>
+                                    <p>Email: <span id="cedemo"></span></p>
+                                    <p>Address: <span id="cademo"></span> </p>
+                                    
+                                    
+                                </div>
+                            </div>
+                            <div class="col-7" id="pay">
+                                <div style="display: flex; flex-direction:column; align-items: center;">
+                                    <h5>Payment Method</h5>
+                                    <p id="pmdemo">Mode</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container mt-3" style="text-align: center; overflow-x: auto; height: 430px;">
+                        <table class="retab">
+                            <thead style="background-color: blue; color:white">
+                              <tr>
+                                <th>SR NO.</th>
+                                <th>ITEM NAME</th>
+                                <th>PRICE</th>
+                                <th>QUANTITY</th>
+                                <th>DISCOUNT</th>
+                                <th>TOTAL</th>
+                                
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1</td>
+                                <td id="itnrow"></td>
+                                <td id="prrow"></td>
+                                <td id="qtrow"></td>
+                                <td id="dcrow">0</td>
+                                <td id="totorow"></td>
+                              </tr>
+                              <tr id="cute">
+                                <td>2</td>
+                                <td id="itn1row"></td>
+                                <td id="pr1row"></td>
+                                <td id="qt1row"></td>
+                                <td id="dc1row">0</td>
+                                <td id="toto1row"></td>
+                              </tr>
+                              <tr id="cute1">
+                                <td>3</td>
+                                <td id="itn2row"></td>
+                                <td id="pr2row"></td>
+                                <td id="qt2row"></td>
+                                <td id="dc2row">0</td>
+                                <td id="toto2row"></td>
+                              </tr>
+                              <tr id="cute2">
+                                <td>4</td>
+                                <td id="itn3row"></td>
+                                <td id="pr3row"></td>
+                                <td id="qt3row"></td>
+                                <td id="dc3row">0</td>
+                                <td id="toto3row"></td>
+                              </tr>
+                              <tr id="cute3">
+                                <td>5</td>
+                                <td id="itn4row"></td>
+                                <td id="pr4row"></td>
+                                <td id="qt4row"></td>
+                                <td id="dc4row">0</td>
+                                <td id="toto4row"></td>
+                              </tr>
+                              <tr id="cute4">
+                                <td>6</td>
+                                <td id="itn5row"></td>
+                                <td id="pr5row"></td>
+                                <td id="qt5row"></td>
+                                <td id="dc5row">0</td>
+                                <td id="toto5row"></td>
+                              </tr>
+                              <tr id="cute5">
+                                <td>7</td>
+                                <td id="itn6row"></td>
+                                <td id="pr6row"></td>
+                                <td id="qt6row"></td>
+                                <td id="dc6row">0</td>
+                                <td id="toto6row"></td>
+                              </tr>
+                              <tr id="cute6">
+                                <td>8</td>
+                                <td id="itn7row"></td>
+                                <td id="pr7row"></td>
+                                <td id="qt7row"></td>
+                                <td id="dc7row">0</td>
+                                <td id="toto7row"></td>
+                              </tr>
+                              
+
+                            </tbody>
+                          </table>
+                    </div>
+
+                    <div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col"><h5 class="mt-5">Thank You For Doing Buisness With Us</h5></div>
+                                <div class="col">
+                                    <div class="totodiv">
+                                        <table class="toto">
+                                            <tr>
+                                                <td>Sub Total</td>
+                                                <td id="totoprice"></td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td>GST</td>
+                                                <td id="totogst"></td>
+                                                
+                                            </tr>
+                                            
+                                            <tr style="background-color: blue; color: white;">
+                                                <td>TOTAL</td>
+                                                <td id="total"></td>
+                                                
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+    
+                             </div>
+    
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="kiti">
+                                        <h4> <b>Declaration</b></h4>
+                                        <p id="tcdemo">We Declare That This Invoice Shows The Actual Price Of The Goods / Services <br> Described And That All Particulars <br> Are True And Correct.</p>
+    
+                                    </div>
+                                      
+                                </div>
+                                <div class="col-7"></div>
+                            </div>
+
+                        </div>
+
+
+
+                        </div>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <div class="triangle-bottomleft" id="triangle-bottomleft"></div>
+                        </div>
+                        <div class="col">
+                            <div id="triangle-topright"></div>
+                        </div>
+                    </div>    
+                    
+                            
+                </div>
+            </div>
+        </div>      
+        
+    </div>
+    
+    
+    <script>
+        function addy(){
+            var hd = document.getElementById('txt_1').value
+            var md = document.getElementById('txt_2').value
+            document.getElementById('txt_2').value = Number(md) + 1;
+            document.getElementById('txt_1').value = Number(hd)+ 1;
+            saveValue('txt_1');
+            saveValue('txt_2');
+            document.getElementById('indemo').innerHTML ="MTCINV100" + (Number(hd) +1);
+            document.getElementById('ondemo').innerHTML = "MTCODR100" + (Number(md) +1);
+        }
+    </script>
+
+    <script type="text/javascript">
+        document.getElementById("txt_1").value = getSavedValue("txt_1");    // set the value to this input
+        document.getElementById("txt_2").value = getSavedValue("txt_2");   // set the value to this input
+        document.getElementById("indemo").innerHTML = "MTCINV100" +  getSavedValue("txt_1");
+        document.getElementById("ondemo").innerHTML = "MTCODR100" +  getSavedValue("txt_2");
+        /* Here you can add more inputs to set value. if it's saved */
+
+        //Save the value function - save it to localStorage as (ID, VALUE)
+        function saveValue(e){
+            var id = e;  // get the sender's id to save it . 
+            var val = document.getElementById(id).value; // get the value. 
+            localStorage.setItem(id, val);// Every time user writing something, the localStorage's value will override . 
+        }
+
+        //get the saved value function - return the value of "v" from localStorage. 
+        function getSavedValue  (v){
+            if (!localStorage.getItem(v)) {
+                return "";// You can change this to your defualt value. 
+            }
+            return localStorage.getItem(v);
+        }
+    </script>
+    <script>
+        var dy = new Date().getFullYear()
+        var dm = new Date().getMonth()
+        var dd = new Date().getDate()
+        var fulld = `${dd}/${dm+1}/${dy}`
+        document.getElementById('iddemo').innerHTML=fulld;
+    </script>
+    
+</body>
+</html>
